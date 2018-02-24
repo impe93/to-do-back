@@ -5,7 +5,10 @@ import logger from 'morgan';
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
+import passport from 'passport';
+
 import routes from './routes/taskRoutes';
+import userRoutes from './routes/userRoutes';
 
 var app = express();
 
@@ -15,6 +18,9 @@ var app = express();
 //mongose connection
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/ToDo');
+require('./models/userModel');
+require('./models/tasksModel');
+require('./config/passport');
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -34,9 +40,14 @@ app.use(function(req, res, next) {
   next();
 });
 */
+
+userRoutes(app);
 routes(app);
 
-app.get('/', (req, res) => res.send(`Node and express server is running`));
+
+app.get('*', function (req, res) {
+  res.sendFile(__dirname + '/dist/index.html');
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

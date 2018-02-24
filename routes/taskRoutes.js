@@ -25,7 +25,6 @@ const routes = (app) => {
   app.route('/task/:taskId')
     .put(aggiornaTask)
     .delete(rimuoviTask);
-  
 }
 
 export default routes;

@@ -1,10 +1,9 @@
 import mongoose from 'mongoose';
-import { TaskSchema } from '../models/tasksModel';
 
 /** 
  * Il modello su cui si basa questo controller
  */
-const Task = mongoose.model('Task', TaskSchema);
+const Task = mongoose.model('Task');
 
 /**
  * Viene utilizzato per aggiungere un task, il task verrà

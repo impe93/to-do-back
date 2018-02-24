@@ -204,6 +204,7 @@ var SlideInOutAnimation = [
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("../../../router/esm5/router.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__lista_cose_da_fare_lista_cose_da_fare_component__ = __webpack_require__("../../../../../src/app/lista-cose-da-fare/lista-cose-da-fare.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__lista_lista_component__ = __webpack_require__("../../../../../src/app/lista/lista.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pagina_non_trovata_pagina_non_trovata_component__ = __webpack_require__("../../../../../src/app/pagina-non-trovata/pagina-non-trovata.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -214,9 +215,12 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
+
 var routes = [
     { path: '', component: __WEBPACK_IMPORTED_MODULE_2__lista_cose_da_fare_lista_cose_da_fare_component__["a" /* ListaCoseDaFareComponent */] },
-    { path: ':tipoLista', component: __WEBPACK_IMPORTED_MODULE_3__lista_lista_component__["a" /* ListaComponent */] }
+    { path: 'pagina-non-trovata', component: __WEBPACK_IMPORTED_MODULE_4__pagina_non_trovata_pagina_non_trovata_component__["a" /* PaginaNonTrovataComponent */] },
+    { path: ':tipoLista', component: __WEBPACK_IMPORTED_MODULE_3__lista_lista_component__["a" /* ListaComponent */] },
+    { path: '**', pathMatch: 'full', redirectTo: 'pagina-non-trovata' }
 ];
 var AppRoutingModule = /** @class */ (function () {
     function AppRoutingModule() {
@@ -307,12 +311,14 @@ var AppComponent = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__lista_lista_component__ = __webpack_require__("../../../../../src/app/lista/lista.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__attivita_attivita_component__ = __webpack_require__("../../../../../src/app/attivita/attivita.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__task_service__ = __webpack_require__("../../../../../src/app/task.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pagina_non_trovata_pagina_non_trovata_component__ = __webpack_require__("../../../../../src/app/pagina-non-trovata/pagina-non-trovata.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -337,7 +343,8 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_8__aggiungi_task_aggiungi_task_component__["a" /* AggiungiTaskComponent */],
                 __WEBPACK_IMPORTED_MODULE_9__elemento_lista_elemento_lista_component__["a" /* ElementoListaComponent */],
                 __WEBPACK_IMPORTED_MODULE_10__lista_lista_component__["a" /* ListaComponent */],
-                __WEBPACK_IMPORTED_MODULE_11__attivita_attivita_component__["a" /* AttivitaComponent */]
+                __WEBPACK_IMPORTED_MODULE_11__attivita_attivita_component__["a" /* AttivitaComponent */],
+                __WEBPACK_IMPORTED_MODULE_13__pagina_non_trovata_pagina_non_trovata_component__["a" /* PaginaNonTrovataComponent */]
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
@@ -746,6 +753,9 @@ var ListaComponent = /** @class */ (function () {
                 _this.listaAttuale = 'completate';
                 return _this.taskService.getTaskCompletati();
             }
+            else {
+                _this.router.navigate(['/pagina-non-trovata']);
+            }
             return null;
         })
             .subscribe(function (tasks) {
@@ -806,6 +816,67 @@ var ListaComponent = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "../../../../../src/app/pagina-non-trovata/pagina-non-trovata.component.css":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/pagina-non-trovata/pagina-non-trovata.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<p>\n  pagina-non-trovata works!\n</p>\n"
+
+/***/ }),
+
+/***/ "../../../../../src/app/pagina-non-trovata/pagina-non-trovata.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PaginaNonTrovataComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var PaginaNonTrovataComponent = /** @class */ (function () {
+    function PaginaNonTrovataComponent() {
+    }
+    PaginaNonTrovataComponent.prototype.ngOnInit = function () {
+    };
+    PaginaNonTrovataComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+            selector: 'app-pagina-non-trovata',
+            template: __webpack_require__("../../../../../src/app/pagina-non-trovata/pagina-non-trovata.component.html"),
+            styles: [__webpack_require__("../../../../../src/app/pagina-non-trovata/pagina-non-trovata.component.css")]
+        }),
+        __metadata("design:paramtypes", [])
+    ], PaginaNonTrovataComponent);
+    return PaginaNonTrovataComponent;
+}());
+
+
+
+/***/ }),
+
 /***/ "../../../../../src/app/task.service.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -827,44 +898,45 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var httpOptions = {
     headers: new __WEBPACK_IMPORTED_MODULE_1__angular_common_http__["c" /* HttpHeaders */]({ 'Content-Type': 'application/json' })
 };
+var hostName = 'http://192.168.0.101';
 var TaskService = /** @class */ (function () {
     function TaskService(http) {
         this.http = http;
     }
     // Implementare il controllo degli errori a tutti i metodi
     TaskService.prototype.getTaskDaFare = function () {
-        return this.http.get('http://localhost:3000/task');
+        return this.http.get(hostName + "/task");
     };
     TaskService.prototype.aggiungiNuovoTask = function (testo) {
-        return this.http.post('http://localhost:3000/task', { testo: testo }, httpOptions);
+        return this.http.post(hostName + "/task", { testo: testo }, httpOptions);
     };
     TaskService.prototype.getTaskCompletati = function () {
-        return this.http.get('http://localhost:3000/task/completati');
+        return this.http.get(hostName + "/task/completati");
     };
     TaskService.prototype.rimuoviTaskCompletati = function () {
-        return this.http.delete('http://localhost:3000/task/completati');
+        return this.http.delete(hostName + "/task/completati");
     };
     TaskService.prototype.getTaskCancellati = function () {
-        return this.http.get('http://localhost:3000/task/cancellati');
+        return this.http.get(hostName + "/task/cancellati");
     };
     TaskService.prototype.rimuoviTaskCancellati = function () {
-        return this.http.delete('http://localhost:3000/task/cancellati');
+        return this.http.delete(hostName + "/task/cancellati");
     };
     TaskService.prototype.aggiornaTask = function (_id, stato, testo) {
         if (stato === void 0) { stato = ''; }
         if (testo === void 0) { testo = ''; }
         if (testo !== '') {
-            return this.http.put("http://localhost:3000/task/" + _id, { testo: testo }, httpOptions);
+            return this.http.put(hostName + "/task/" + _id, { testo: testo }, httpOptions);
         }
         else if (stato !== '') {
-            return this.http.put("http://localhost:3000/task/" + _id, { stato: stato }, httpOptions);
+            return this.http.put(hostName + "/task/" + _id, { stato: stato }, httpOptions);
         }
         else {
             return null;
         }
     };
     TaskService.prototype.rimuoviTask = function (id) {
-        return this.http.delete("http://localhost:3000/task/" + id);
+        return this.http.delete(hostName + "/task/" + id);
     };
     TaskService = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
