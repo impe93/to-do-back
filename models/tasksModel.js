@@ -17,4 +17,4 @@ const TaskSchema = new Schema({
   }
 });
 
-mongoose.model('Task', TaskSchema);
+export default TaskSchema;
