@@ -1,10 +1,11 @@
+import mongoose from 'mongoose';
 import passport from 'passport';
-import { LocalStrategy } from 'passport-local';
-import moongose from 'moongose';
+import { Strategy } from 'passport-local';
 
-let User = moongose.model('User');
 
-passport.use(new LocalStrategy({
+let User = mongoose.model('User');
+
+passport.use(new Strategy({
     usernameField: 'email'
   },
   function(username, password, done) {

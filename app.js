@@ -18,8 +18,6 @@ var app = express();
 //mongose connection
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/ToDo');
-require('./models/userModel');
-require('./models/tasksModel');
 require('./config/passport');
 
 app.use(logger('dev'));

@@ -2,7 +2,7 @@ import crypto from 'crypto';
 import jwt from 'jsonwebtoken';
 import moongose from 'mongoose';
 
-const Schema = moongose.Schema();
+const Schema = moongose.Schema;
 
 const UserSchema = new Schema({
   email: {
@@ -18,7 +18,7 @@ const UserSchema = new Schema({
   salt: String
 });
 
-UserSchema.methods.setPassword = (password) => {
+UserSchema.methods.setPassword = function(password) {
   this.salt = crypto.randomBytes(16).toString('hex');
   this.hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64, 'sha512').toString('hex');
 }
@@ -40,4 +40,4 @@ UserSchema.methods.generateJwt = function() {
   }, "MY_SECRET"); // Il segreto viene generalmente passato come variabile d'ambiente e non nel codice
 };
 
-mongoose.model('User', UserSchema);
+export default UserSchema;

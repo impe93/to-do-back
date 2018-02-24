@@ -1,8 +1,8 @@
 import mongoose from 'mongoose';
 
-const Schema = mongoose.Schema();
+const Schema = mongoose.Schema;
 
-const TaskSchema = new Schema({
+export const TaskSchema = new Schema({
   stato: {
     type: String,
     default: 'in_corso'
@@ -16,5 +16,3 @@ const TaskSchema = new Schema({
     default: Date.now
   }
 });
-
-export default TaskSchema;

@@ -1,10 +1,11 @@
 import mongoose from 'mongoose';
 import passport from 'passport';
+import UserSchema from '../models/userModel';
 
-const User = mongoose.model('User');
+const User = mongoose.model('User', UserSchema);
 
 export const registrazione = (req, res) => {
-  
+
   if (!req.body.name || !req.body.email || !req.body.password) {
     res.json({
       "message": 'Sono richiesti tutti i campi'
@@ -14,18 +15,18 @@ export const registrazione = (req, res) => {
 
   const query = { email: req.body.email };
 
-  User.findOne(query, (error, user) => {
-    if (error) {
-      res.send(error);
-    }
-    res.json({
-      "message": 'Utente già esistente'
-    });
-  });
+  //User.findOne(query, (error, user) => {
+  //  if (error) {
+  //    res.send(error);
+  //  }
+  //  res.json({
+  //    "message": 'Utente già esistente'
+  //  });
+  //});
 
-  if (res.message) {
-    return;
-  }
+  //if (res.message) {
+  //  return;
+  //}
   
   const user = new User();
 
@@ -38,6 +39,7 @@ export const registrazione = (req, res) => {
       res.send(err)
     }
     const token = user.generateJwt();
+    res.status(200);
     res.json({
       "token": token
     });
@@ -63,6 +65,7 @@ export const login = (req, res) => {
 
     if (user) {
       token = user.generateJwt();
+      res.status(200);
       res.json({
         "token": token
       });
