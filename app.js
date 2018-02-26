@@ -6,6 +6,7 @@ import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import passport from 'passport';
+import cors from 'cors';
 
 import routes from './routes/taskRoutes';
 import userRoutes from './routes/userRoutes';
@@ -18,6 +19,8 @@ var app = express();
 //mongose connection
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/ToDo');
+app.use(cors());
+
 require('./config/passport');
 
 app.use(logger('dev'));
@@ -28,24 +31,20 @@ app.use(cookieParser());
 var distDir = __dirname + "/dist/";
 app.use(express.static(distDir));
 
-// Serve per ricevere chiamate anche da un altro indirizzo, da rimuovere in produzione
-/*
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "http://localhost:4200");
-  res.header("Access-Control-Allow-Headers", "X-Requested-With, Content-Type, Origin, Authorization, Accept, Client-Security-Token, Accept-Encoding");
-  res.header("Access-Control-Allow-Methods", "POST, GET, DELETE, PUT");
-  res.header("Access-Control-Allow-Credentials", "true");
-  next();
-});
-*/
-
 userRoutes(app);
 routes(app);
 
+app.use(function (err, req, res, next) {
+  if (err.name === 'UnauthorizedError') {
+    res.status(401);
+    res.json({"message" : err.name + ": " + err.message});
+  }
+});
 
 app.get('*', function (req, res) {
   res.sendFile(__dirname + '/dist/index.html');
 });
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -59,8 +58,7 @@ app.use(function(err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  // render the error page
+  
   res.status(err.status || 500);
   res.send(err);
 });

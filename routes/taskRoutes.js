@@ -9,22 +9,29 @@ import {
   rimuoviTaskCancellati
 } from '../controllers/tasksControllers';
 
+import jwt from 'express-jwt';
+
+const auth = jwt({
+  secret: 'MY_SECRET', // Dovrebbe continuare ad esser passata come variabile d'ambiente
+  userProperty: 'payload'
+});
+
 const routes = (app) => {
   app.route('/task')
-    .get(getTaskDaFare)
-    .post(aggiungiNuovoTask);
+    .get(auth, getTaskDaFare)
+    .post(auth, aggiungiNuovoTask);
   
   app.route('/task/completati')
-    .get(getTaskCompletati)
-    .delete(rimuoviTaskCompletati);
+    .get(auth, getTaskCompletati)
+    .delete(auth, rimuoviTaskCompletati);
   
   app.route('/task/cancellati')
-    .get(getTaskCancellati)
-    .delete(rimuoviTaskCancellati);
+    .get(auth, getTaskCancellati)
+    .delete(auth, rimuoviTaskCancellati);
   
   app.route('/task/:taskId')
-    .put(aggiornaTask)
-    .delete(rimuoviTask);
+    .put(auth, aggiornaTask)
+    .delete(auth, rimuoviTask);
 }
 
 export default routes;
