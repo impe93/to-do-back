@@ -1,5 +1,10 @@
 import mongoose from 'mongoose';
 import passport from 'passport';
+
+import validator from 'email-validator';
+import xss from 'xss';
+import mongoSanitize from 'mongo-sanitize';
+
 import UserSchema from '../models/userModel';
 
 const User = mongoose.model('User', UserSchema);
@@ -13,24 +18,17 @@ export const registrazione = (req, res) => {
     return;
   }
 
-  const query = { email: req.body.email };
+  if(!validator.validate(req.body.email)) {
+    res.json({
+      "message": 'Email non valida'
+    });
+  }
 
-  //User.findOne(query, (error, user) => {
-  //  if (error) {
-  //    res.send(error);
-  //  }
-  //  res.json({
-  //    "message": 'Utente già esistente'
-  //  });
-  //});
-
-  //if (res.message) {
-  //  return;
-  //}
+  
   
   const user = new User();
 
-  user.name = req.body.name;
+  user.name = mongoSanitize(xss(req.body.name));
   user.email = req.body.email;
   user.setPassword(req.body.password);
 
@@ -52,7 +50,7 @@ export const login = (req, res) => {
 
   if(!req.body.email || !req.body.password) {
     sendJSONresponse(res, 400, {
-      "message": "All fields required"
+      "message": "È necessaria la compilazione di tutti i campi"
     });
     return;
   }

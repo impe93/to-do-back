@@ -1,6 +1,9 @@
 import mongoose from 'mongoose';
 import { TaskSchema } from '../models/tasksModel';
 
+import xss from 'xss';
+import mongoSanitize from 'mongo-sanitize';
+
 /** 
  * Il modello su cui si basa questo controller
  */
@@ -14,7 +17,12 @@ const Task = mongoose.model('Task', TaskSchema);
  * @param res: Response
  */
 export const aggiungiNuovoTask = (req, res) => {
-  let nuovoTask = new Task(req.body);
+  const task = {
+    testo: req.body.testo,
+    id_utente: req.payload._id
+  };
+  console.log(task);
+  let nuovoTask = new Task(task);
 
   nuovoTask.save((err, task) => {
     if(err) {
@@ -30,7 +38,7 @@ export const aggiungiNuovoTask = (req, res) => {
  * @param res: Response
  */
 export const getTaskDaFare = (req, res) => {
-  const query = { stato: 'in_corso' };
+  const query = { stato: 'in_corso', id_utente: req.payload._id };
   Task.find(query, (error, task) => {
     if(error) {
       res.send(error);
@@ -45,7 +53,7 @@ export const getTaskDaFare = (req, res) => {
  * @param res: Response
  */
 export const getTaskCompletati = (req, res) => {
-  const query = { stato: 'completato' };
+  const query = { stato: 'completato', id_utente: req.payload._id };
   Task.find(query, (error, task) => {
     if(error) {
       res.send(error);
@@ -60,7 +68,7 @@ export const getTaskCompletati = (req, res) => {
  * @param res: Response
  */
 export const getTaskCancellati = (req, res) => {
-  const query = { stato: 'eliminato' };
+  const query = { stato: 'eliminato', id_utente: req.payload._id };
   Task.find(query, (error, task) => {
     if(error) {
       res.send(error);
@@ -76,12 +84,24 @@ export const getTaskCancellati = (req, res) => {
  * @param res: Response
  */
 export const aggiornaTask = (req, res) => {
-  Task.findOneAndUpdate({ _id: req.params.taskId }, req.body, { new: true }, (error, task) => {
-    if(error) {
-      res.send(error);
+  let campoDaModificare = {};
+  if (req.body.testo) {
+    campoDaModificare = { testo: mongoSanitize(xss(req.body.testo)) };
+  } else {
+    campoDaModificare = { stato: (req.body.stato) };
+  }
+
+  Task.findOneAndUpdate(
+    { _id: req.params.taskId },
+    campoDaModificare,
+    { new: true },
+    (error, task) => {
+      if(error) {
+        res.send(error);
+      }
+      res.json(task);
     }
-    res.json(task);
-  });
+  );
 };
 
 /**
@@ -104,7 +124,7 @@ export const rimuoviTask = (req, res) => {
  * @param res: Response
  */
 export const rimuoviTaskCompletati = (req, res) => {
-  Task.remove({ stato: 'completato' }, (error, task) => {
+  Task.remove({ stato: 'completato', id_utente: req.payload._id }, (error, task) => {
     if(error) {
       res.send(error);
     }
@@ -118,7 +138,7 @@ export const rimuoviTaskCompletati = (req, res) => {
  * @param res: Response
  */
 export const rimuoviTaskCancellati = (req, res) => {
-  Task.remove({ stato: 'eliminato' }, (error, task) => {
+  Task.remove({ stato: 'eliminato', id_utente: req.payload._id }, (error, task) => {
     if(error) {
       res.send(error);
     }

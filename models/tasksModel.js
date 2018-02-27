@@ -11,6 +11,10 @@ export const TaskSchema = new Schema({
     type: String,
     default: ''
   },
+  id_utente: {
+    type: String,
+    required: true
+  },
   data_creazione: {
     type: Date,
     default: Date.now
