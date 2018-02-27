@@ -1,6 +1,9 @@
 import mongoose from 'mongoose';
 import { TaskSchema } from '../models/tasksModel';
 
+import xss from 'xss';
+import mongoSanitize from 'mongo-sanitize';
+
 /** 
  * Il modello su cui si basa questo controller
  */
@@ -81,12 +84,24 @@ export const getTaskCancellati = (req, res) => {
  * @param res: Response
  */
 export const aggiornaTask = (req, res) => {
-  Task.findOneAndUpdate({ _id: req.params.taskId }, req.body, { new: true }, (error, task) => {
-    if(error) {
-      res.send(error);
+  let campoDaModificare = {};
+  if (req.body.testo) {
+    campoDaModificare = { testo: mongoSanitize(xss(req.body.testo)) };
+  } else {
+    campoDaModificare = { stato: (req.body.stato) };
+  }
+
+  Task.findOneAndUpdate(
+    { _id: req.params.taskId },
+    campoDaModificare,
+    { new: true },
+    (error, task) => {
+      if(error) {
+        res.send(error);
+      }
+      res.json(task);
     }
-    res.json(task);
-  });
+  );
 };
 
 /**

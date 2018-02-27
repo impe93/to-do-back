@@ -2,6 +2,8 @@ import mongoose from 'mongoose';
 import passport from 'passport';
 import { Strategy } from 'passport-local';
 
+import mongoSanitize from 'mongo-sanitize';
+
 
 let User = mongoose.model('User');
 
@@ -9,7 +11,7 @@ passport.use(new Strategy({
     usernameField: 'email'
   },
   function(username, password, done) {
-    User.findOne({ email: username }, function (err, user) {
+    User.findOne({ email: mongoSanitize(username) }, function (err, user) {
       if (err) {
         return done(err);
       }
