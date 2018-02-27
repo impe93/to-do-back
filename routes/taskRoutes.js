@@ -12,7 +12,7 @@ import {
 import jwt from 'express-jwt';
 
 const auth = jwt({
-  secret: 'MY_SECRET', // Dovrebbe continuare ad esser passata come variabile d'ambiente
+  secret: process.env.SECRET || 'STRONG_SECRET', // Dovrebbe continuare ad esser passata come variabile d'ambiente
   userProperty: 'payload'
 });
 

@@ -37,7 +37,7 @@ UserSchema.methods.generateJwt = function() {
     email: this.email,
     name: this.name,
     exp: parseInt(expiry.getTime() / 1000),
-  }, "MY_SECRET"); // Il segreto viene generalmente passato come variabile d'ambiente e non nel codice
+  }, process.env.SECRET || 'STRONG_SECRET' ); // Il segreto viene generalmente passato come variabile d'ambiente e non nel codice
 };
 
 export default UserSchema;
