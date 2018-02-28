@@ -400,7 +400,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, "h5 {\n  margin-top: 10px;\n}", ""]);
 
 // exports
 
@@ -636,7 +636,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "#task-modificato {\n  margin-right: 10px;\n}\n", ""]);
+exports.push([module.i, "#task-modificato {\n  margin-right: 10px;\n}\n\nh5 {\n  margin-top: 10px;\n}", ""]);
 
 // exports
 
@@ -988,7 +988,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, "h2 {\n  margin-top: 20px;\n}\n\nform {\n  margin-top: 10px;\n}", ""]);
 
 // exports
 
@@ -1066,7 +1066,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "h2 {\n  margin-top: 5%;\n}\nlabel {\n  font-weight: bold;\n}", ""]);
+exports.push([module.i, "", ""]);
 
 // exports
 
@@ -1127,7 +1127,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, "h1 {\n  margin-top: 20px;\n  margin-bottom: 20px;\n}", ""]);
 
 // exports
 
@@ -1187,7 +1187,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, "h2 {\n  margin-top: 20px;\n}\n\nform {\n  margin-top: 10px;\n}", ""]);
 
 // exports
 
@@ -1293,38 +1293,38 @@ var TaskService = /** @class */ (function () {
     }
     // Implementare il controllo degli errori a tutti i metodi
     TaskService.prototype.getTaskDaFare = function () {
-        return this.http.get(hostName + "/task", this.header);
+        return this.http.get("/task", this.header);
     };
     TaskService.prototype.aggiungiNuovoTask = function (testo) {
-        return this.http.post(hostName + "/task", { testo: testo }, this.header);
+        return this.http.post("/task", { testo: testo }, this.header);
     };
     TaskService.prototype.getTaskCompletati = function () {
-        return this.http.get(hostName + "/task/completati", this.header);
+        return this.http.get("/task/completati", this.header);
     };
     TaskService.prototype.rimuoviTaskCompletati = function () {
-        return this.http.delete(hostName + "/task/completati", this.header);
+        return this.http.delete("/task/completati", this.header);
     };
     TaskService.prototype.getTaskCancellati = function () {
-        return this.http.get(hostName + "/task/cancellati", this.header);
+        return this.http.get("/task/cancellati", this.header);
     };
     TaskService.prototype.rimuoviTaskCancellati = function () {
-        return this.http.delete(hostName + "/task/cancellati", this.header);
+        return this.http.delete("/task/cancellati", this.header);
     };
     TaskService.prototype.aggiornaTask = function (_id, stato, testo) {
         if (stato === void 0) { stato = ''; }
         if (testo === void 0) { testo = ''; }
         if (testo !== '') {
-            return this.http.put(hostName + "/task/" + _id, { testo: testo }, this.header);
+            return this.http.put("/task/" + _id, { testo: testo }, this.header);
         }
         else if (stato !== '') {
-            return this.http.put(hostName + "/task/" + _id, { stato: stato }, this.header);
+            return this.http.put("/task/" + _id, { stato: stato }, this.header);
         }
         else {
             return null;
         }
     };
     TaskService.prototype.rimuoviTask = function (id) {
-        return this.http.delete(hostName + "/task/" + id, this.header);
+        return this.http.delete("/task/" + id, this.header);
     };
     TaskService = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
