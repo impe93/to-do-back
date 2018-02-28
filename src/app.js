@@ -17,7 +17,7 @@ var app = express();
 app.use(helmet());
 
 // only if you're behind a reverse proxy (Heroku, Bluemix, AWS if you use an ELB, custom Nginx setup, etc) 
-// app.enable('trust proxy');
+app.enable('trust proxy');
 var apiLimiter = new RateLimit({
   windowMs: 15*60*1000, // 15 minutes
   max: 100,
