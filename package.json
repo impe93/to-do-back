@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node dist/www.js",
+    "start": "node dist/bin/www.js",
     "dev": "nodemon ./src/bin/www --exec babel-node -e js",
     "build": "babel src -d dist",
     "start-prod": "node lib/www.js"
