@@ -31,7 +31,7 @@ var app = express();
 
 //mongose connection
 mongoose.Promise = global.Promise;
-mongoose.connect(process.env.DATABASE_URL || 'mongodb://localhost/ToDo');
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/ToDo');
 require('./config/passport');
 
 app.use(logger('dev'));
