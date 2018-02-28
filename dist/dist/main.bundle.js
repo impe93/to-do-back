@@ -1282,7 +1282,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-var hostName = 'https://lorenzo-imperatrice-to-do.herokuapp.com/';
+var hostName = '';
 var TaskService = /** @class */ (function () {
     function TaskService(http, auth) {
         this.http = http;
