@@ -52,24 +52,24 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var app = (0, _express2.default)();
 
-app.use((0, _helmet2.default)());
+// app.use(helmet());
 
 // only if you're behind a reverse proxy (Heroku, Bluemix, AWS if you use an ELB, custom Nginx setup, etc) 
 // app.enable('trust proxy');
-var apiLimiter = new _expressRateLimit2.default({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100,
-  delayMs: 0 // disabled
-});
-app.use('/task/', apiLimiter);
-app.use('/user/', apiLimiter);
+// var apiLimiter = new RateLimit({
+//  windowMs: 15*60*1000, // 15 minutes
+//  max: 100,
+//  delayMs: 0 // disabled
+//});
+// app.use('/task/', apiLimiter);
+// app.use('/user/', apiLimiter);
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 
 //mongose connection
 _mongoose2.default.Promise = global.Promise;
-_mongoose2.default.connect('mongodb://localhost/ToDo');
+_mongoose2.default.connect(process.env.MONGODB_URI || 'mongodb://localhost/ToDo');
 require('./config/passport');
 
 app.use((0, _morgan2.default)('dev'));
