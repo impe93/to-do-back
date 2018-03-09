@@ -10,7 +10,7 @@ It's possible to run this in a local environment only if there's already install
 
 ### Installing
 
-After having installed those 3 things you have to run the command `npm install` to **install the project dependency** in the project directory. It’s important to **change the mongoDB URL** in the app.js code or pass this as env parameter `(MONGODB_URI=<db url>)` to establish the connection with the DB. It’s possible to **lunch the app** just by run the command `npm run dev`, and this will start the project. The app tries to start on **port 80** but you can change that by passing `PORT=<port number>` as env parameter. The **port 80 can be an issue** for people that use Windows as OS because on that port is possible to find ISS running, for the other that use Linux or MacOS will need to use `sudo` command when running it.
+After having installed those 3 things you have to run the command `npm install` to **install the project dependency** in the project directory. It’s important to **change the mongoDB URL** in the app.js code or pass this as env parameter `(MONGODB_URI=<db url>)` to establish the connection with the DB. It’s possible to **launch the app** just by run the command `npm run dev`, and this will start the project. The app tries to start on **port 80** but you can change that by passing `PORT=<port number>` as env parameter. The **port 80 can be an issue** for people that use Windows as OS because on that port is possible to find ISS running, for the other that use Linux or MacOS will need to use `sudo` command when running it.
 
 ## Deployment
 
