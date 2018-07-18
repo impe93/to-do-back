@@ -1,0 +1,6 @@
+{
+  "name": "to-do-back",
+  "description": "Back-end for the Lorenzo Imperatrice To-Do App",
+  "repository": "https://github.com/impe93/to-do-back",
+  "keywords": ["node", "express", "to-do"]
+}
