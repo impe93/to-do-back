@@ -1,6 +1,6 @@
 # To Do Backend
 
-This project is born to **give a backend** to my other **front-end project** called [to-do](https://github.com/impe93/to-do). It is an easy express application for make **CRUD** (Create, Read, Update, Delete) operations, gives the possibility to **register** and serve the front-end app. Is it **possible to try** it at https://lorenzo-imperatrice-to-do.herokuapp.com .
+This project is born to **give a backend** to my other **front-end project** called [to-do](https://github.com/impe93/to-do). It is an easy express application for make **CRUD** (Create, Read, Update, Delete) operations, gives the possibility to **register** and serve the front-end app.
 
 ## Getting Started
 
